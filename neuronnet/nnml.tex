@@ -1,0 +1,126 @@
+\documentclass{beamer}
+\usepackage[magyar]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\mode<presentation>{ \usetheme{boxes} } 
+\title{Szóreprezentációk folytonos vektortérben}
+\AtBeginSection[]{} % for optional outline or other recurrent slide
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{A dimenziók átka}
+A hagyományos nyelvmodellek (pl. n-gram alapúak)
+
+általában 1-2 szónyi környezet
+
+nem veszik figyelembe a hasonlóságot
+
+“The cat is walking in the bedroom” 
+
+“A dog was running in a room”
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Elosztott reprezentáció}
+\includegraphics[width=\linewidth]{bengio-neural-archtecture.pdf}
+\end{frame}
+
+\begin{frame}
+
+\begin{itemize}
+\item Maximalizálni \[ L = \frac{1}{T} \sum_t \log f(w_t,w_{t-1},\dots,w_{t-n+1};\theta)+R(\theta) \]
+
+\item Input \[ x = (C(w_{t-1}),C(w_{t-2}),\dots ,C(w_{t-n+1})) \]
+
+\begin{itemize}
+\item \( \dim(C) = \(|V| \times m\)
+\end{itemize}
+
+\item Output \[ y = b + W x + U \tanh(d + H x) \]
+
+\begin{itemize}
+\item \(\dim(b) = |V|\), \dim(W) = |V| \times (n-1)m, \dim(U) = |V| \times h, \dim(d) = h,
+\dim(H) = h \times (n-1)m\) 
+\end{itemize}
+
+\item Normalizálás (softmax) \[ f(w_t,w_{t-1},\dots,w_{t-n+1}) = \frac{e^y_{w_t}}{\sum_i e^y_i} \]
+
+\item Paraméterek száma \[ |V|(1+ nm + h) + h(1+(n-1)m) \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Eredmények}
+
+\includegraphics[width=\linewidth]{bengio-results.pdf}
+\end{frame}
+
+\section{Mikolov et al 2014}
+\begin{frame}
+\frametitle{Időköltségek}
+
+\begin{itemize}
+\item Feedforward Neural Net Language Model (NNLM)
+
+\[ Q = n \times m + n \times m \times h + h \times |V| \]
+
+bináris fa hierarchiába rendezve a szótárat \(\log_2(|V|)\)
+
+\item Recurrent NNLM
+
+\[ Q = h \times h + h \times |V| \]
+
+Nincs projekciós réteg, \(m=h\)
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Egyszerűbb modellek szóvektortanulásra}
+
+\begin{itemize}
+\item Continuous Bag-of-Words
+
+Szóvektorok átlagát veszi a környezetből, nincs rejtett réteg.
+
+\[ Q = n \times m + m \times \log_2(|V|) \]
+
+\item Continuous Skip-gram
+
+1 szó az input, megjósolja a környező szavakat.
+
+\[ Q = C \times (m + m \times \log_2(|V|) \]
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\includegraphics[width=\linewidth]{mikolov-cbow-skip}
+\end{frame}
+
+
+\begin{frame}
+\includegraphics[width=\linewidth]{mikolov-test-set}
+\end{frame}
+
+\begin{frame}
+\includegraphics[width=\linewidth]{mikolov-results1}
+\end{frame}
+
+\begin{frame}
+\includegraphics[width=\linewidth]{mikolov-results2}
+\end{frame}
+
+\begin{frame}
+\includegraphics[width=\linewidth]{mikolov-example-relationships}
+\end{frame}
+
+\end{document}
+
