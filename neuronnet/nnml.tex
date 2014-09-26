@@ -5,24 +5,35 @@
 \usepackage{amsfonts}
 \mode<presentation>{ \usetheme{boxes} } 
 \title{Szóreprezentációk folytonos vektortérben}
-\AtBeginSection[]{} % for optional outline or other recurrent slide
+\AtBeginSection[]{
+    \begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+    \end{frame}
+}
+
 \begin{document}
 
 \begin{frame}
   \titlepage
 \end{frame}
 
+\section{Bengio et al 2013: A Neural Probabilistic Language Model}
 \begin{frame}
 \frametitle{A dimenziók átka}
-A hagyományos nyelvmodellek (pl. n-gram alapúak)
+\begin{itemize}
+\item A hagyományos nyelvmodellek (pl. n-gram alapúak)
 
-általában 1-2 szónyi környezet
+\item általában 1-2 szónyi környezet
 
-nem veszik figyelembe a hasonlóságot
+\item nem veszik figyelembe a hasonlóságot
+
+\medskip
 
 “The cat is walking in the bedroom” 
 
 “A dog was running in a room”
+\end{itemize}
 
 \end{frame}
 
@@ -61,7 +72,18 @@ nem veszik figyelembe a hasonlóságot
 \includegraphics[width=\linewidth]{bengio-results.pdf}
 \end{frame}
 
-\section{Mikolov et al 2014}
+\section{Mikolov et al 2014: Efficient Estimation of Word Representation in Vector Space}
+\begin{frame}
+\begin{itemize}
+\item Cél: jó minőségű szóvektorok tanulása
+
+\item multiple degrees of similarity - szintakitikai és szemantikai
+
+\[ v("King") - v("Man") + v("Woman") \sim v("Queen") \]
+\end{itemize}
+
+\end{frame}
+
 \begin{frame}
 \frametitle{Időköltségek}
 
@@ -116,6 +138,10 @@ Szóvektorok átlagát veszi a környezetből, nincs rejtett réteg.
 
 \begin{frame}
 \includegraphics[width=\linewidth]{mikolov-results2}
+\end{frame}
+
+\begin{frame}
+\includegraphics[width=\linewidth]{mikolov-training-time}
 \end{frame}
 
 \begin{frame}
