@@ -163,12 +163,20 @@ Szóvektorok átlagát veszi a környezetből, nincs rejtett réteg.
 \end{frame}
 
 \begin{frame}
-\begin{description}
-\item[megfigyelés 1:]
-\(i, j, k\) szavak, \(P()\) valószínűségek: \(\frac{P(k|i)}{P(k|j)} >> 1\), ha \(k\) jelentése kapcsolatos az \(i, j\) szavakkal, de az \(i\) szóra jellemző, \(j\)-re nem; és közel van 1-hez, ha inadekvát. Tehát a \(w_i-w_j\) szóvektorok különbsége a valószínűségük hányadosaival lehet arányos a modellben.
+\paragraph{megfigyelés 1:}
+\(i, j, k\) szavak, \(P()\) valószínűségek: \(\frac{P(k|i)}{P(k|j)} \gg 1\), ha \(k\) jelentése kapcsolatos az \(i, j\) szavakkal, de az \(i\) szóra jellemző, \(j\)-re nem; és közel van 1-hez, ha inadekvát. Tehát a \(w_i-w_j\) szóvektorok különbsége a valószínűségük hányadosaival lehet arányos a modellben.
 
+\medskip
+
+\includegraphics[width=\linewidth]{pennington-ice-steam}
+\end{frame}
+
+\begin{frame}
+\begin{description}
 \item[megfigyelés 2:]
 \(w_i-w_j\) különbség és a \(w_k\) próbaszó (probe word) vektorokra szimmetrikus is lehetne a modell (mert a szó-kontextusszó viszony szimmetrikus)
+
+\bigskip
 
 \item[megfigyelés 3:]
 a valószínűségek skalárok, a szóvektorok vektorok, de a két vektor skaláris szorzatát kipróbálhatnánk
@@ -177,17 +185,26 @@ a valószínűségek skalárok, a szóvektorok vektorok, de a két vektor skalá
 
 \begin{frame}
 levezethető, hogy ilyen tulajdonságokkal rendelkezik ez az egyszerű modell:
-\[ w_i \times w_k + b = \log(X_{ik}) \]
+\[ w_i \cdot w_k + b = \log(X_{ik}) \]
 
 a modell betanításához (a \(w_i\) vektorok kiszámításához) a legkisebb négyzetek megfelelő
 (a glove-ban még egy súlyfüggvénnyel szorzunk, ami kiegyenlíti a szógyakoriságbeli nagyságrendi különbségeket)
 
-a modell szerencsére a \(|V|^2\)-nél sokkal jobban méretezhető, mert az együttes előfordulások eloszlása nem egyenletes, hanem hatványtörvény szerinti (~ ritka mátrix; polinomiálisan kevesebb számítás szükséges)
+a modell szerencsére a \(|V|^2\)-nél sokkal jobban méretezhető, mert az együttes előfordulások eloszlása nem egyenletes, hanem hatványtörvény szerinti (ritka mátrix; polinomiálisan kevesebb számítás szükséges)
 \end{frame}
 
 \begin{frame}
 \frametitle{Eredmények} 
 \textcolor{red}{világverő :)}
+\end{frame}
+\begin{frame}
+\includegraphics[]{pennington-accuracy}
+\end{frame}
+\begin{frame}
+\includegraphics[width=\linewidth]{pennington-spearman-rank}
+\end{frame}
+\begin{frame}
+\includegraphics[width=\linewidth]{pennington-ner-f1}
 \end{frame}
 \end{document}
 
